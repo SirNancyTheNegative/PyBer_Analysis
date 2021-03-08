@@ -23,7 +23,7 @@ The number of rides is similar; since each row in our data details the informati
 # Get the total rides for each city type
 pyber_ride_counts = pyber_data_df.groupby(["type"])["ride_id"].count()
 ```
-
+ 
 For the number of drivers, however, we need to take a somewhat different approach. If we simply take the values from our merged DataFrame, we'll get ![the following incorrect summary DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Ave_summary.png)
 
 The issue here is the number of drivers: While it could be expected that a ride-share service might have a few more drivers than rides on some days, it doesn't make any sense for there to be such a large amount of unused drivers, especially in urban areas. So, to fix this, instead of making use of the merged DataFrame, we can instead look at the city DataFrame in order to get a more accurate number of drivers.
