@@ -24,7 +24,7 @@ The number of rides is similar; since each row in our data details the informati
 pyber_ride_counts = pyber_data_df.groupby(["type"])["ride_id"].count()
 ```
 
-For the number of drivers, however, we need to take a somewhat different approach. If we simply take the values from our merged DataFrame, we'll get [the following incorrect summary DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Ave_summary.png)
+For the number of drivers, however, we need to take a somewhat different approach. If we simply take the values from our merged DataFrame, we'll get ![the following incorrect summary DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Ave_summary.png)
 
 The issue here is the number of drivers: While it could be expected that a ride-share service might have a few more drivers than rides on some days, it doesn't make any sense for there to be such a large amount of unused drivers, especially in urban areas. So, to fix this, instead of making use of the merged DataFrame, we can instead look at the city DataFrame in order to get a more accurate number of drivers.
 ```
@@ -62,7 +62,7 @@ pycd_fares = pycd_fares.reset_index()
 py_fares = pycd_fares.pivot(index="date",columns="type",values="fare")
 ```
 
-From this, we get [the following DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Weekly_Pivot.png) 
+From this, we get ![the following DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Weekly_Pivot.png) 
 
 As can be seen, there are numerous NaN values in this DataFrame. Ordinarily, we would clean the data of these values, but considering we only care about the values that do exist, and the methods we take will ignore NaN values, we can simply move on.
 
@@ -85,7 +85,7 @@ pyfare_df.info()
 pyfare_weekly = pyfare_df.resample('W').sum()
 ```
 
-What this gives us is a [DataFrame where the indices are the end of a week](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Resampled.png), and the values for each city type are the sums of the fares from each week. This gives us what we need to plot each on a graph. We can do so in an object-oriented fashion:
+What this gives us is a ![DataFrame where the indices are the end of a week](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Resampled.png), and the values for each city type are the sums of the fares from each week. This gives us what we need to plot each on a graph. We can do so in an object-oriented fashion:
 ```
 # 8. Using the object-oriented interface method, plot the resample DataFrame using the df.plot() function. 
 # Import the style from Matplotlib.
