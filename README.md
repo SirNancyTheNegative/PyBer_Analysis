@@ -87,7 +87,7 @@ pyfare_weekly = pyfare_df.resample('W').sum()
 
 What this gives us is a ![DataFrame where the indices are the end of a week](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Resampled.png), and the values for each city type are the sums of the fares from each week. This gives us what we need to plot each on a graph. We can do so in an object-oriented fashion:
 ```
-# 8. Using the object-oriented interface method, plot the resample DataFrame using the df.plot() function. 
+# Using the object-oriented interface method, plot the resample DataFrame using the df.plot() function. 
 # Import the style from Matplotlib.
 from matplotlib import style
 # Use the graph style fivethirtyeight.
