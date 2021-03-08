@@ -34,7 +34,7 @@ pyber_driver_counts = city_data_df.groupby(["type"])["driver_count"].sum()
 
 From here, the resulting DataFrame can be done through mere arithmetic. Because pandas DataFrames can divide rows based on data type with a simple arithmetic operator, fares per ride and fares per driver are as simple as dividing pyber_fares by pyber_ride_counts and pyber_fares by pyber_driver_counts, respectively.
 
-![The following DataFrame is produced once all pertinent data is assembled.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_RealAve_summary.png)
+![The following DataFrame is produced once all pertinent data is assembled.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/Pyber_RealAve_summary.png)
 
 From this we can glean a large number of facts: In terms of the number of rides, number of drivers and gross fares, the urban cities remain on top, and the rural areas produce very little revenue when viewed in this light, with suburban areas proving to be the middle of the road. We can also gather that although the urban cities have the highest gross fares, the number of rides and the number of drivers increase faster than the gross fares, causing the smallest fares per rides and by far the smallest fares per drivers. On the other hand, though rural areas have the lowest gross fares, their fares per ride and fares per driver are by far the highest of the three. Once more, suburban areas prove to be the middle ground, if not slightly skewed towards rural areas in that respect.
 
