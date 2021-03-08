@@ -24,7 +24,9 @@ The number of rides is similar; since each row in our data details the informati
 pyber_ride_counts = pyber_data_df.groupby(["type"])["ride_id"].count()
 ```
  
-For the number of drivers, however, we need to take a somewhat different approach. If we simply take the values from our merged DataFrame, we'll get ![the following incorrect summary DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Ave_summary.png)
+For the number of drivers, however, we need to take a somewhat different approach. If we simply take the values from our merged DataFrame, we'll get the following incorrect summary DataFrame.
+
+![alt text](https://raw.githubusercontent.com/SirNancyTheNegative/PyBer_Analysis/main/Analysis/PyBer_Ave_summary.png "The DataFrame when we pull from the merged data")
 
 The issue here is the number of drivers: While it could be expected that a ride-share service might have a few more drivers than rides on some days, it doesn't make any sense for there to be such a large amount of unused drivers, especially in urban areas. So, to fix this, instead of making use of the merged DataFrame, we can instead look at the city DataFrame in order to get a more accurate number of drivers.
 ```
@@ -34,7 +36,9 @@ pyber_driver_counts = city_data_df.groupby(["type"])["driver_count"].sum()
 
 From here, the resulting DataFrame can be done through mere arithmetic. Because pandas DataFrames can divide rows based on data type with a simple arithmetic operator, fares per ride and fares per driver are as simple as dividing pyber_fares by pyber_ride_counts and pyber_fares by pyber_driver_counts, respectively.
 
-![The following DataFrame is produced once all pertinent data is assembled.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/Pyber_RealAve_summary.png)
+The following DataFrame is produced once all pertinent data is assembled.
+
+![alt text](https://raw.githubusercontent.com/SirNancyTheNegative/PyBer_Analysis/main/Analysis/Pyber_RealAve_summary.png "The DataFrame with the correct values.")
 
 From this we can glean a large number of facts: In terms of the number of rides, number of drivers and gross fares, the urban cities remain on top, and the rural areas produce very little revenue when viewed in this light, with suburban areas proving to be the middle of the road. We can also gather that although the urban cities have the highest gross fares, the number of rides and the number of drivers increase faster than the gross fares, causing the smallest fares per rides and by far the smallest fares per drivers. On the other hand, though rural areas have the lowest gross fares, their fares per ride and fares per driver are by far the highest of the three. Once more, suburban areas prove to be the middle ground, if not slightly skewed towards rural areas in that respect.
 
@@ -62,7 +66,9 @@ pycd_fares = pycd_fares.reset_index()
 py_fares = pycd_fares.pivot(index="date",columns="type",values="fare")
 ```
 
-From this, we get ![the following DataFrame.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Weekly_Pivot.png) 
+From this, we get the following DataFrame:
+
+![alt text](https://raw.githubusercontent.com/SirNancyTheNegative/PyBer_Analysis/main/Analysis/PyBer_Weekly_Pivot.png "") 
 
 As can be seen, there are numerous NaN values in this DataFrame. Ordinarily, we would clean the data of these values, but considering we only care about the values that do exist, and the methods we take will ignore NaN values, we can simply move on.
 
@@ -85,7 +91,11 @@ pyfare_df.info()
 pyfare_weekly = pyfare_df.resample('W').sum()
 ```
 
-What this gives us is a ![DataFrame where the indices are the end of a week](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_Resampled.png), and the values for each city type are the sums of the fares from each week. This gives us what we need to plot each on a graph. We can do so in an object-oriented fashion:
+What this gives us is a DataFrame where the indices are the end of a week:
+
+![alt text](https://raw.githubusercontent.com/SirNancyTheNegative/PyBer_Analysis/main/Analysis/PyBer_Resampled.png "")
+
+And the values for each city type are the sums of the fares from each week. This gives us what we need to plot each on a graph. We can do so in an object-oriented fashion:
 ```
 # Using the object-oriented interface method, plot the resample DataFrame using the df.plot() function. 
 # Import the style from Matplotlib.
@@ -96,8 +106,9 @@ pyfare_weekly.plot(title = "Total Fare by City Type",xlabel = "",ylabel = "Fare 
 plt.tight_layout()
 plt.savefig("Analysis/PyBer_fare_summary.png")
 ```
+This is the resulting graph:
 
-![This is the resulting graph.](https://github.com/SirNancyTheNegative/PyBer_Analysis/tree/main/Analysis/PyBer_fare_summary.png)
+![alt text](https://raw.githubusercontent.com/SirNancyTheNegative/PyBer_Analysis/main/Analysis/PyBer_fare_summary.png "")
 
 As could probably be expected, week by week, suburban and rural fares are consistently less urban fares. A large portion of this consistency is due to population density; because urban sprawls are usually heavily condensed, the number of potential customers drastically increases, and the fact that parking spaces are often much more contested in urban spaces than suburban or rural ones means that the prospect of having a car drop you off and leave without you needing to worry about parking and other such fees is a tempting prospect. On the other side of matters, more rural areas have much more sparse populations, owing much to agricultural development for their formation, and the need to travel potentially long distances to reach other people necessitates the use of a car, oftentimes a truck if said traveler happens to need to transport large objects or large quantities of objects. As such, folks from rural towns often have no need for ride-sharing services, especially if they happen to live in a part of the world where the gasoline used is much cheaper than the fare would be. As seen before with the fares per rides and fares per density, suburban areas are more middle-of-the-road. On account of higher population densities than in rural areas, the amount of revenue that could be made in a week is understandably higher, and according to the graph, this city type seems to be experiencing a faster boon of growth than that of the urban areas, as of April 29th, 2019.
 
